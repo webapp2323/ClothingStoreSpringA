@@ -26,7 +26,7 @@ import java.util.Optional;
 @ToString
 @RestController
 @RequestMapping("/api/v1/shirts")
-@AllArgsConstructor(onConstructor_ = {@Autowired})
+@AllArgsConstructor
 public class ShirtController {
 
     private final ShirtService shirtService;
@@ -35,7 +35,7 @@ public class ShirtController {
     public ResponseEntity<List<Shirt>> getAllShirts() {
         log.info("Received request to get all shirts");
         List<Shirt> shirts = shirtService.getAllShirts();
-        log.info("Returning {} shirts", shirts.size());
+        log.info("Returning {} shirts", Optional.of(shirts.size()));
         return ResponseEntity.ok(shirts);
     }
 
@@ -65,7 +65,10 @@ public class ShirtController {
             log.info("Shirt found: {}", shirt);
         }
 
-        log.info("Found {} shirts for the provided ids: {}", shirts.size(), ids);
+
+        log.info("Found {} shirts for the provided ids: {}", Optional.of(Optional.of(shirts.size())), ids);
+ 
+
         return ResponseEntity.ok(shirts);
     }
 
